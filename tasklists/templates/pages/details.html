@@ -1,0 +1,63 @@
+
+{% extends 'pages/layouts/master.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+        <section class="section">
+          <div class="section-header">
+            <h1>Default Layout</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Layout</a></div>
+              <div class="breadcrumb-item">Default Layout</div>
+            </div>
+          </div>
+        
+        <div class="section-body">
+          <h2 class="section-title">By {{ task.user_id }}</h2>
+          <p class="section-lead">{{ task.created|naturaltime }}</p>
+          <div class="card">
+            <div class="card-header">
+              <h4>{{ task.name }}</h4>
+            </div>
+            <div class="card-body">
+              <p>{{ task.notes }}</p>
+            </div>
+            <div class="card-footer bg-whitesmoke">
+              <a href="{% url 'tasklists:index' %}">Go Back</a> &nbsp; &nbsp;  <a href="{% url 'tasklists:create_view' %}">Add New Task</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <div class="section-body">
+        <h2 class="section-title">Articles</h2>
+        <p class="section-lead">This article component is based on card and flexbox.</p>
+        <div class="row">
+        {% for other in others %}
+
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+          <article class="article article-style-b">
+            <div class="article-header">
+              <div class="article-image" data-background="{{ other.image.url}}">
+              </div>
+              <!-- <div class="article-badge">
+                <div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> Trending</div>
+              </div> -->
+            </div>
+            
+            <div class="article-details">
+              <div class="article-title">
+                <h2><a href="#">{{other.name}}</a></h2>
+              </div>
+              <p>{{ other.notes|truncatewords:15 }}</p>
+              <div class="article-cta">
+                <a href="{% url 'tasklists:details' other.id %}"><b> Read More</b> <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}
